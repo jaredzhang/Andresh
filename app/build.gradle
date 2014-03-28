@@ -1,0 +1,42 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'android'
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPath = 0
+def versionBuild = 0
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def buildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+    df.setTimeZone(TimeZone.getTimeZone("UTC+8"))
+    return df.format(new Date())
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode versionMajor*10000+versionMinor*1000+versionPath*100+versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPath}"
+        buildConfigField "String","GIT_SHA","\"${gitSha()}\""
+        buildConfigField "String","BUILD_TIME","\"${buildTime()}\""
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
