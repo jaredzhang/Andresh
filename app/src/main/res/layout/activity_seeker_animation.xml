@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.exp.app.SeekerAnimationActivity">
+
+    <Button
+        android:text="Seeker Animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startSeekerAnimation"
+        />
+
+    <Button
+        android:text="Nope Animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startNopeAnimation"
+        />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"
+        android:layout_margin="20dp"
+        />
+
+
+</LinearLayout>

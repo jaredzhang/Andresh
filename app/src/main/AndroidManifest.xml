@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.testanimatetextviewcolor.app" >
+    package="com.example.exp.app" >
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.example.testanimatetextviewcolor.app.MainActivity"
-            android:label="@string/app_name" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,16 +17,88 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.testanimatetextviewcolor.app.AnimateTextColorActivity"
-            android:label="@string/title_activity_animate_text_color" >
+            android:name=".AnimateTextColorActivity"
+            android:label="@string/title_activity_animate_text_color" />
+        <activity
+            android:name=".RotateDrawableActivity"
+            android:label="@string/title_activity_rotate_drawable" />
+        <activity
+            android:name=".ParseXMLToBundleActivity"
+            android:label="@string/title_activity_parse_xmlto_bundle" />
+        <activity
+            android:name=".UriActivity"
+            android:label="@string/title_activity_uri" />
+
+        <!-- <activity -->
+        <!-- android:name="com.example.exp.app.ActionBarLogoActivity" -->
+        <!-- android:label="@string/title_activity_action_bar_logo" -->
+        <!-- android:theme="@style/AppTheme.Logo" /> -->
+
+        <provider
+            android:name="com.example.android.provider.provider.SampleProvider"
+            android:authorities="com.example.exp.app.provider"
+            android:exported="false" />
+v
+        <activity
+            android:name=".SeekerAnimationActivity"
+            android:label="@string/title_activity_seeker_animation" >
         </activity>
         <activity
-            android:name="com.example.testanimatetextviewcolor.app.RotateDrawableActivity"
-            android:label="@string/title_activity_rotate_drawable" >
+            android:name=".LevelListAnimationActivity"
+            android:label="@string/title_activity_level_list_animation" >
         </activity>
         <activity
-            android:name="com.example.testanimatetextviewcolor.app.ParseXMLToBundle"
-            android:label="@string/title_activity_parse_xmlto_bundle" >
+            android:name=".CropImageActivity"
+            android:label="@string/title_activity_crop_image" >
+        </activity>
+        <activity
+            android:name=".RingChartActivity"
+            android:label="@string/title_activity_ring_chart" >
+        </activity>
+        <activity
+            android:name=".DragViewActivity"
+            android:label="@string/title_activity_drag_view" >
+        </activity>
+        <!--<activity-->
+            <!--android:name=".AndroidSSPIntentFilter"-->
+            <!--android:label="@string/title_activity_android_sspintent_filter" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SENDTO" />-->
+
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+
+                <!--<data-->
+                    <!--android:scheme="package"-->
+                    <!--android:sspPattern="support-.*@example.com" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+        <activity
+            android:name=".BoxListActivity"
+            android:label="@string/title_activity_box_list" >
+        </activity>
+        <!--<activity-->
+            <!--android:name=".EditTransitionActivity"-->
+            <!--android:label="@string/title_activity_edit_transition" >-->
+        <!--</activity>-->
+        <activity
+            android:name=".SignUpTricksActivity"
+            android:label="@string/title_activity_sign_up_tricks" >
+        </activity>
+        <activity
+            android:name=".BlurImageActivity"
+            android:label="@string/title_activity_blur_image" >
+        </activity>
+        <activity
+            android:name=".TouchDelegateActivity"
+            android:label="@string/title_activity_touch_delegate" >
+        </activity>
+        <activity
+            android:name=".ReflectionActivity"
+            android:label="@string/title_activity_reflection" >
+        </activity>
+        <activity
+            android:name=".AnimateActionBarActivity"
+            android:label="@string/title_activity_animate_action_bar" >
         </activity>
     </application>
 

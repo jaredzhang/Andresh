@@ -1,6 +1,19 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
+        classpath files('robocop/RoboCoP-0.5-jar-with-dependencies.jar')
+    }
+}
+
 import java.text.SimpleDateFormat
 
-apply plugin: 'android'
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.application'
+import com.rain.utils.android.robocop.generator.*
 
 def versionMajor = 1
 def versionMinor = 0
@@ -8,27 +21,37 @@ def versionPath = 0
 def versionBuild = 0
 
 def gitSha() {
-    return 'git rev-parse --short HEAD'.execute().text.trim()
+    return "git --git-dir=${rootDir}/.git --work-tree=${rootDir} rev-parse --short HEAD".
+            execute().text.trim()
 }
 
 def buildTime() {
     def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
-    df.setTimeZone(TimeZone.getTimeZone("UTC+8"))
+    df.setTimeZone(TimeZone.getTimeZone("GMT+8"))
     return df.format(new Date())
 }
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "20.0"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode versionMajor*10000+versionMinor*1000+versionPath*100+versionBuild
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPath * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPath}"
-        buildConfigField "String","GIT_SHA","\"${gitSha()}\""
-        buildConfigField "String","BUILD_TIME","\"${buildTime()}\""
+        buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime()}\""
     }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'src/main/java-gen', 'src-gen']
+            res.srcDirs = ['src/main/res']
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
@@ -39,4 +62,21 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.0'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
+    compile 'com.android.support:support-v4:19.0.+'
+    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'de.greenrobot:greendao:1.3.7'
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+}
+
+task contentProviderGen {
+    description = 'Generating a beautiful ContentProvider and required classes'
+    doLast {
+        System.out.println("Generating ContentProvider...")
+        String schemaFilename = "${projectDir}/robocop/schema.json";
+        String baseOutputDir = "${projectDir}/src-gen/";
+        ContentProviderGenerator.generateContentProvider(schemaFilename, baseOutputDir);
+    }
 }
